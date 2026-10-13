@@ -1,0 +1,33 @@
+[project]
+name = "auction-generator"
+version = "0.1.0"
+description = "Генератор потока результатов торгов на автоаукционах"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "clickhouse-connect>=0.8.0",
+    "pydantic-settings>=2.6.0",
+]
+
+[project.scripts]
+auction-generator = "auction_gen.cli:main"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0.0",
+    "ruff>=0.8.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/auction_gen"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W", "B", "UP"]
