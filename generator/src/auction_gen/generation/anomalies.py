@@ -15,7 +15,7 @@ class AnomalyKind(enum.StrEnum):
 
 class AnomalyPolicy:
     def __init__(self, probability: float, rng: random.Random) -> None:
-        self._probability = probability 
+        self._probability = probability
         self._rng = rng
 
     def decide(self) -> AnomalyKind | None:

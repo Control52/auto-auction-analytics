@@ -52,8 +52,8 @@ class LotMetrics:
     sale_status: SaleStatus
 
 
-def _round_to(value: float, step: int) -> int:
-    """Округлить до шага: _round_to(12_345, 100) = 12_300."""
+def round_to(value: float, step: int) -> int:
+    """Округлить до шага: round_to(12_345, 100) = 12_300."""
     return int(round(value / step) * step)
 
 
@@ -66,7 +66,7 @@ def car_age(rng: random.Random) -> int:
 def mileage_km(rng: random.Random, age: int) -> int:
     """Пробег: возраст × средний пробег за год × случайный разброс."""
     share = rng.uniform(MIN_MILEAGE_SHARE, MAX_MILEAGE_SHARE)
-    return _round_to(age * KM_PER_YEAR * share, MILEAGE_STEP_KM)
+    return round_to(age * KM_PER_YEAR * share, MILEAGE_STEP_KM)
 
 
 def market_price_usd(
@@ -93,7 +93,7 @@ def generate_metrics(
     market = market_price_usd(model, grade, age, mileage, at)
 
     start_share = rng.uniform(START_PRICE_MIN_SHARE, START_PRICE_MAX_SHARE)
-    start = _round_to(market * start_share, PRICE_STEP_USD)
+    start = round_to(market * start_share, PRICE_STEP_USD)
     bids = bids_count(rng, grade)
 
     if bids < MIN_BIDS_TO_SELL:
@@ -102,7 +102,7 @@ def generate_metrics(
     else:
         status = SaleStatus.SOLD
         final_share = rng.uniform(FINAL_PRICE_MIN_SHARE, FINAL_PRICE_MAX_SHARE)
-        final = _round_to(market * final_share, PRICE_STEP_USD)
+        final = round_to(market * final_share, PRICE_STEP_USD)
 
     return LotMetrics(
         manufacture_year=at.year - age,
