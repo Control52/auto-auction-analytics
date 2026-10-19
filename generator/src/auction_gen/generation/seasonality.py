@@ -5,7 +5,7 @@
 """
 
 import math
-from datetime import datetime, timedelta
+from datetime import UTC, datetime, timedelta
 
 PEAK_HOUR = 13.0  # час пика торгов
 PEAK_WIDTH_HOURS = 2.5  # ширина пика: торги идут примерно с 9 до 17
@@ -16,7 +16,7 @@ OTHER_WEEKDAY_LEVEL = 0.3  # будни, но не свой день
 WEEKEND_LEVEL = 0.1  # выходные
 SATURDAY = 5  # datetime.weekday(): 0 = понедельник ... 5 = суббота, 6 = воскресенье
 
-TREND_START = datetime(2026, 1, 1)  # от этой даты считается рост цен
+TREND_START = datetime(2026, 1, 1, tzinfo=UTC)  # от этой даты считается рост цен (по UTC)
 YEARLY_PRICE_GROWTH = 0.05  # +5% в год
 
 MINUTES_PER_HOUR = 60
